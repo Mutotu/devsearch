@@ -1,0 +1,10 @@
+{% extends 'main.html' %} {% block content %} {% comment %} when form is used,
+add {% csrf_token %} {% endcomment %}
+<form action="" method="POST">
+  {% csrf_token %}
+  <p>Are you sure wou want to "{{object}}"?</p>
+  <a href="{% url 'projects'%}"> Go Back</a>
+  <input type="submit" value="Confirm" />
+</form>
+
+{% endblock %}
