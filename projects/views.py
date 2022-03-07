@@ -1,6 +1,7 @@
 from email.mime import message
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Project
 
 projectsList = [
     {
@@ -27,15 +28,19 @@ def projects(request):
     # page = 'projects'
     # return render(request, 'projects/projects.html', {'page' : page} )
     ######
-    page = 'projects'
-    number= 101
-    context = {'page':page, 'number':number,'projects':projectsList}
+    # page = 'projects'
+    # number= 101
+    projects = Project.objects.all()
+    context = {'projects':projects}
     return render(request, 'projects/projects.html', context)
 
 def project(request, pk):
     # return HttpResponse('Here is the product')
-    projectObj = None
-    for i in projectsList:
-        if i['id'] == pk:
-            projectObj = i
-    return render(request, 'projects/single-project.html', {'project': projectObj})
+    # projectObj = None
+    # for i in projectsList:
+    #     if i['id'] == pk:
+    #         projectObj = i
+    
+    projectObj = Project.objects.get(id=pk)
+    tags = projectObj.tags.all()
+    return render(request, 'projects/single-project.html', {'project': projectObj, 'tags':tags})

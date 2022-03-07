@@ -14,7 +14,25 @@
 <h1>Projects Template</h1>
 <hr />
 <h1>Projects</h1>
-
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Project</th>
+    <th>Votes</th>
+    <th>Ratio</th>
+  </tr>
+  {% for project in projects%}
+  <tr>
+    <td>{{project.description}}</td>
+    <td>{{project.vote_total}}</td>
+    <td>{{project.ratio}}</td>
+    <td>{{project.created}}</td>
+    <td>{{project.ratio}}</td>
+    <td><a href="{% url 'project' project.id %}">{{project.title}} </a></td>
+    {% endfor %}
+  </tr>
+</table>
+{% comment %}
 <ul>
   {% for project in projects %}
 
@@ -26,5 +44,4 @@
 
   {% endfor %}
 </ul>
-
-{% endblock content %}
+{% endcomment %} {% endblock content %}
