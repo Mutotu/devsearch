@@ -32,7 +32,7 @@ def project(request, pk):
 def create_project(request):
     form = ProjectForm()
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         # see if all the fields are checked
         if form.is_valid():
             form.save()
@@ -44,7 +44,7 @@ def update_project(request, pk):
     project = Project.objects.get(id=pk)
     form = ProjectForm(instance=project)
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, request.FILES,  instance=project)
         # see if all the fields are checked
         if form.is_valid():
             form.save()
