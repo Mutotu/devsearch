@@ -2,7 +2,7 @@ from os import truncate
 from typing import TYPE_CHECKING
 from django.db import models
 import uuid
-
+from users.models import Profile
 # Create your models here.
 
 # python manage.py makemigrations => to migrate classes
@@ -12,7 +12,7 @@ import uuid
 # blank=True is telling Django that it is ok i=the field is empty.
 
 class Project(models.Model):
-    
+    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     featured_iamge = models.ImageField(null=True, blank=True, default="defalt.jpg")
